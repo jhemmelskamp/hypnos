@@ -1,10 +1,9 @@
-FROM ubuntu:14.04
+FROM python:2.7-slim
 
-MAINTAINER John Beieler <johnb30@gmail.com>
 
-RUN apt-get update && apt-get install -y git python-dev python-pip
+RUN apt-get update && apt-get install -y git
 
-RUN pip install git+https://github.com/openeventdata/petrarch2.git
+RUN pip install git+https://github.com/jhemmelskamp/petrarch2.git
 
 ADD . /src
 
