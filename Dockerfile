@@ -1,8 +1,6 @@
-FROM ubuntu:14.04
+FROM python:2.7-slim
 
-MAINTAINER John Beieler <jbeieler@caerusassociates.com>
-
-RUN apt-get update && apt-get install -y git python-dev python-pip 
+RUN apt-get update && apt-get install -y git
 
 ADD . /src
 
