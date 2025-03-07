@@ -1,13 +1,25 @@
 version: '2'
 services:
-    hypnos:
-        build: .
-        links:
-            - ccnlp
-            - petrarch
-        ports:
-            - "5002:5002"
-    ccnlp:
-        image: caerusassociates/ccnlp:1.0.0
-    petrarch:
-        build: petrarch/.
+  hypnos:
+    build: .
+    ports:
+      - "5002:5002"
+    networks:
+      - hypnos_network
+  ccnlp:
+    image: nlpbox/corenlp
+    networks:
+     - hypnos_network
+    command: ["java", "-mx4g", "-cp", "*", "edu.stanford.nlp.pipeline.StanfordCoreNLPServer", "-port", "5000"]
+    ports:
+     - "5000:5000"
+  petrarch:
+    build: petrarch/.
+    ports: 
+        - "5001:5001"
+    networks:
+      - hypnos_network
+
+networks:
+  hypnos_network:
+    driver: bridge
